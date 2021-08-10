@@ -24,9 +24,10 @@ internal struct Heading: Fragment {
         let body = stripTrailingMarkers(
             from: text.html(usingURLs: urls, modifiers: modifiers)
         )
+        let id = body.lowercased().replacingOccurrences(of: " ", with: "-")
 
         let tagName = "h\(level)"
-        return "<\(tagName)>\(body)</\(tagName)>"
+        return "<\(tagName) id=\"\(id)\">\(body)</\(tagName)>"
     }
 
     func plainText() -> String {
