@@ -33,13 +33,11 @@ internal struct Link: Fragment {
         let url = target.url(from: urls)
         let title = text.html(usingURLs: urls, modifiers: modifiers)
 
-        switch target {
-        case .url:
+        if url.contains("http") || url.contains("https") {
             return "<a href=\"\(url)\" target=\"_blank\">\(title)</a>"
-        case .reference:
+        } else {
             return "<a href=\"\(url)\">\(title)</a>"
         }
-
     }
 
     func plainText() -> String {
