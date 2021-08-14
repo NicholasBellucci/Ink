@@ -32,7 +32,14 @@ internal struct Link: Fragment {
               modifiers: ModifierCollection) -> String {
         let url = target.url(from: urls)
         let title = text.html(usingURLs: urls, modifiers: modifiers)
-        return "<a href=\"\(url)\">\(title)</a>"
+
+        switch target {
+        case .url:
+            return "<a href=\"\(url)\" target=\"_blank\">\(title)</a>"
+        case .reference:
+            return "<a href=\"\(url)\">\(title)</a>"
+        }
+
     }
 
     func plainText() -> String {
